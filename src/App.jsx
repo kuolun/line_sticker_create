@@ -10,7 +10,7 @@ function App() {
   const [apiKey, setApiKey] = useState('')
   
   // 步驟 2: 張數選擇
-  const [count, setCount] = useState(8)
+  const [count, setCount] = useState(1)
   
   // 步驟 3: 角色描述/圖片和主題說明
   const [characterDescription, setCharacterDescription] = useState('')
@@ -430,6 +430,13 @@ function App() {
               placeholder="請輸入您的 Gemini API Key"
               className="form-input"
             />
+            <button
+              className="btn btn-secondary"
+              onClick={() => window.open('https://aistudio.google.com/', '_blank')}
+              style={{ marginTop: '10px' }}
+            >
+              申請 API Key
+            </button>
           </div>
         </div>
 
@@ -442,6 +449,7 @@ function App() {
               onChange={(e) => setCount(Number(e.target.value))}
               className="form-input"
             >
+              <option value={1}>1 張</option>
               <option value={8}>8 張</option>
               <option value={16}>16 張</option>
               <option value={24}>24 張</option>
