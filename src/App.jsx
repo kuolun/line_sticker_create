@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react'
 import './App.css'
 import { generateImageDescriptionsWithText, generateTextStyle } from './utils/gemini'
 import { generateCharacter, generateStickerWithText, generateMainImage, generateTabImage, generateGrid8Image } from './utils/characterGenerator'
-import { createGrid8, splitGrid8, removeBackgroundSimple, fileToDataURL } from './utils/imageUtils'
+import { createGrid8, splitGrid8, removeBackgroundSimple, fileToDataURL, resizeImage } from './utils/imageUtils'
 import { downloadAsZip } from './utils/zipDownloader'
 
 function App() {
@@ -350,17 +350,36 @@ function App() {
       setCutImages(allCutImages)
       setProgress('裁切完成！正在生成主要圖片和標籤圖片...')
 
-      // 生成主要圖片（240x240，無文字）
+      const firstSticker = allCutImages[0]
+      
+      // 生成主要圖片（240x240，無文字）- 先嘗試 API，失敗則 fallback 到縮放
       setProgress('正在生成主要圖片（240×240，無文字）...')
-      const mainImg = await generateMainImage(apiKey, characterImage, theme)
-      const mainImgProcessed = await removeBackgroundSimple(mainImg, backgroundThreshold)
-      setMainImage(mainImgProcessed)
+      let mainImg
+      try {
+        mainImg = await generateMainImage(apiKey, characterImage, theme)
+        const mainImgProcessed = await removeBackgroundSimple(mainImg, backgroundThreshold)
+        setMainImage(mainImgProcessed)
+        setProgress('主要圖片生成成功！正在生成標籤圖片...')
+      } catch (mainError) {
+        console.warn('API 生成主要圖片失敗，使用縮放方案:', mainError.message)
+        setProgress('主要圖片 API 生成失敗，使用第一張貼圖縮放...')
+        mainImg = await resizeImage(firstSticker, 240, 240)
+        setMainImage(mainImg)
+      }
 
-      // 生成標籤圖片（96x74，無文字，角色為主）
+      // 生成標籤圖片（96x74，無文字，角色為主）- 先嘗試 API，失敗則 fallback 到縮放
       setProgress('正在生成標籤圖片（96×74，無文字）...')
-      const tabImg = await generateTabImage(apiKey, characterImage, theme)
-      const tabImgProcessed = await removeBackgroundSimple(tabImg, backgroundThreshold)
-      setTabImage(tabImgProcessed)
+      let tabImg
+      try {
+        tabImg = await generateTabImage(apiKey, characterImage, theme)
+        const tabImgProcessed = await removeBackgroundSimple(tabImg, backgroundThreshold)
+        setTabImage(tabImgProcessed)
+      } catch (tabError) {
+        console.warn('API 生成標籤圖片失敗，使用縮放方案:', tabError.message)
+        setProgress('標籤圖片 API 生成失敗，使用第一張貼圖縮放...')
+        tabImg = await resizeImage(firstSticker, 96, 74)
+        setTabImage(tabImg)
+      }
 
       setCurrentStep(9)
       setProgress('完成！所有貼圖已生成，可以下載了')

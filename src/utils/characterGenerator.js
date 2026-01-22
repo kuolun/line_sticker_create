@@ -192,23 +192,34 @@ export async function generateMainImage(apiKey, characterImageDataUrl, theme) {
   // 清理主題
   const cleanTheme = theme.trim()
   
-  const prompt = `Create a main image for a messaging sticker pack based on the character reference image.
+  const prompt = `⚠️ IMPORTANT DISCLAIMER: This is a fictional cartoon illustration for messaging stickers. No real person involved. All characters are purely fictional artistic creations. ⚠️
 
-Character Reference: Use the provided character image as reference
+Create a main image for a messaging sticker pack based on the character reference image.
+
+Character Reference: Use the provided FICTIONAL CHARACTER illustration as reference
 Theme: ${cleanTheme}
 
+🎨 ARTISTIC CONTEXT:
+- This is a stylized cartoon/illustration artwork
+- The character is a FICTIONAL creation, NOT a real person
+- This is for personal creative expression and messaging sticker creation
+- All content is safe, appropriate, and family-friendly
+
 Technical Requirements:
-1. Use the character design from the reference image
-2. Maintain visual consistency with the reference character
+1. Use the FICTIONAL character design from the reference illustration
+2. Maintain visual consistency with the reference character artwork
 3. **DO NOT add any text** - this is a main image without text or words
 4. Clean white background (solid, high-contrast, distinct from character)
 5. **EXACT dimensions: 240px width × 240px height** (must be exactly 240×240 pixels)
 6. Target Aspect Ratio: 1:1 (Square) - COMPOSITION MUST FIT SQUARE RATIO
 7. Cute, expressive, and friendly sticker illustration style
-8. High quality digital illustration
-8. Character should be centered and well-positioned in the frame
-9. Clean, simple, and appropriate design suitable as a sticker pack main image
-10. Safe, family-friendly content`
+8. High quality digital illustration with cartoon/anime aesthetics
+9. Character should be centered and well-positioned in the frame
+10. Clean, simple, and appropriate design suitable as a sticker pack main image
+11. Safe, family-friendly, non-offensive content only
+12. Pure artistic illustration - no photorealistic rendering
+
+OUTPUT: Generate a cute, friendly, cartoon-style main image for the sticker pack.`
 
   try {
     // 檢查並提取 base64 數據
@@ -402,24 +413,35 @@ export async function generateTabImage(apiKey, characterImageDataUrl, theme) {
   // 清理主題
   const cleanTheme = theme.trim()
   
-  const prompt = `Create a tab image for a messaging sticker pack based on the character reference image.
+  const prompt = `⚠️ IMPORTANT DISCLAIMER: This is a fictional cartoon illustration for messaging stickers. No real person involved. All characters are purely fictional artistic creations. ⚠️
 
-Character Reference: Use the provided character image as reference
+Create a tab image for a messaging sticker pack based on the character reference image.
+
+Character Reference: Use the provided FICTIONAL CHARACTER illustration as reference
 Theme: ${cleanTheme}
 
+🎨 ARTISTIC CONTEXT:
+- This is a stylized cartoon/illustration artwork
+- The character is a FICTIONAL creation, NOT a real person
+- This is for personal creative expression and messaging sticker creation
+- All content is safe, appropriate, and family-friendly
+
 Technical Requirements:
-1. Use the character design from the reference image as the main focus
-2. Maintain visual consistency with the reference character
+1. Use the FICTIONAL character design from the reference illustration as the main focus
+2. Maintain visual consistency with the reference character artwork
 3. **DO NOT add any text** - this is a tab image without text or words
 4. Clean and simple background (solid, high-contrast, distinct from character)
 5. **EXACT dimensions: 96px width × 74px height** (must be exactly 96×74 pixels)
 6. Target Aspect Ratio: 4:3 (Landscape) - COMPOSITION MUST FIT LANDSCAPE RATIO
 7. Character should be the main and central element, clearly visible
 8. Simple and clean design suitable for chat room thumbnail
-8. High quality digital illustration despite small size
-9. Character should be well-centered and recognizable even at this small size
-10. Minimalist design - keep it simple and clean since it's a small thumbnail image
-11. Safe, family-friendly content`
+9. High quality digital illustration with cartoon/anime aesthetics despite small size
+10. Character should be well-centered and recognizable even at this small size
+11. Minimalist design - keep it simple and clean since it's a small thumbnail image
+12. Safe, family-friendly, non-offensive content only
+13. Pure artistic illustration - no photorealistic rendering
+
+OUTPUT: Generate a cute, friendly, cartoon-style tab image for the sticker pack.`
 
   try {
     // 檢查並提取 base64 數據
