@@ -5,7 +5,7 @@
 | 情境 | 做法 |
 |---|---|
 | 本機開發 | 執行 `npm install` 安裝依賴，再執行 `npm run dev` 啟動開發伺服器 |
-| 部署到 Cloudflare Pages | 到 GitHub repo 的 Settings → Secrets and variables → Actions 設定兩個 secrets：`CLOUDFLARE_API_TOKEN`、`CLOUDFLARE_ACCOUNT_ID`。設好後把程式碼 push 到 `main` 分支，`.github/workflows/deploy.yml` 會自動建置並部署，第一次 push 時會自動建立 Cloudflare Pages 專案 |
+| 部署到 Cloudflare Pages | 到 GitHub repo 的 Settings → Secrets and variables → Actions 設定兩個 secrets：`CLOUDFLARE_API_TOKEN`、`CLOUDFLARE_ACCOUNT_ID`。設好後把程式碼 push 到 `main` 分支，`.github/workflows/deploy.yml` 會自動建置並部署，第一次 push 時會自動建立 Cloudflare Pages 專案。本機用 wrangler 部署時，帳號改由 `CLOUDFLARE_ACCOUNT_ID` 環境變數或 `wrangler login` 提供，不要寫進 `wrangler.toml`（Pages 不支援 `account_id`）。 |
 | 改網域 | 到 Cloudflare Dashboard 的 Pages 專案設定（Custom domains）新增自訂網域，依提示設定 DNS 即可 |
 
 一個使用 React 開發的 LINE 貼圖自動生成工具，整合 Gemini API 進行智能圖片生成和處理。
